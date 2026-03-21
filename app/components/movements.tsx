@@ -44,6 +44,53 @@ const movements = [
     dateRecorded: "2026-02-28",
     verificationStatus: "Pending verification",
   },
+
+  // Expenses from budgetList
+  {
+    name: "Mortgage",
+    description: "Monthly payment for the main hotel property loan.",
+    transactionType: "Expense",
+    amount: "$2,450",
+    movementType: "Fixed",
+    dateRecorded: "2026-03-01",
+    verificationStatus: "Pending verification",
+  },
+  {
+    name: "Property Taxes",
+    description: "Set aside a fixed amount each month for annual taxes.",
+    transactionType: "Expense",
+    amount: "$620",
+    movementType: "Fixed",
+    dateRecorded: "2026-03-01",
+    verificationStatus: "Pending verification",
+  },
+  {
+    name: "Insurance Premium",
+    description: "Hotel and liability insurance billed monthly.",
+    transactionType: "Expense",
+    amount: "$310",
+    movementType: "Fixed",
+    dateRecorded: "2026-03-01",
+    verificationStatus: "Pending verification",
+  },
+  {
+    name: "Software Subscriptions",
+    description: "Property management and booking tools.",
+    transactionType: "Expense",
+    amount: "$145",
+    movementType: "Fixed",
+    dateRecorded: "2026-03-01",
+    verificationStatus: "Pending verification",
+  },
+  {
+    name: "Security Services",
+    description: "Overnight security contract for the property.",
+    transactionType: "Expense",
+    amount: "$480",
+    movementType: "Fixed",
+    dateRecorded: "2026-03-01",
+    verificationStatus: "Pending verification",
+  },
 ];
 
 export default function Movements() {
