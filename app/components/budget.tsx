@@ -57,7 +57,7 @@ export default function Budget() {
             className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm"
           >
             <div className="flex items-baseline justify-between gap-2">
-              <h3 className="text-base font-semibold">{item.name}</h3>
+              <h3 className="text-base font-semibold text-black">{item.name}</h3>
               <span className="text-sm font-semibold text-zinc-800">
                 {item.amount}
               </span>
