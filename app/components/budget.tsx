@@ -1,44 +1,54 @@
 const transactions = [
   {
+    id: "a11c8e2-6d1b-4c9a-9b2f-1a7d3e5f1001",
     name: "Mortgage",
     description: "Monthly payment for the main hotel property loan.",
     transactionType: "Expense",
     amount: "$2,450",
     expenseType: "Fixed",
     timeRange: "Indefinite",
+    dateRecorded: "2026-02-01",
   },
   {
+    id: "c33e0a4-8b3d-6e1c-b4d2-3c9f5a7b1003",
     name: "Property Taxes",
     description: "Set aside a fixed amount each month for annual taxes.",
     transactionType: "Expense",
     amount: "$620",
     expenseType: "Fixed",
     timeRange: "Indefinite",
+    dateRecorded: "2026-02-01",
   },
   {
+    id: "e55a2c6-ad5f-803e-d6f4-5eb07c9d1005",
     name: "Insurance Premium",
     description: "Hotel and liability insurance billed monthly.",
     transactionType: "Expense",
     amount: "$310",
     expenseType: "Fixed",
     timeRange: "Indefinite",
+    dateRecorded: "2026-02-01",
   },
   {
+    id: "077c4e8-cf71-a260-f816-70d29ebf1007",
     name: "Software Subscriptions",
     description: "Property management and booking tools.",
     transactionType: "Expense",
     amount: "$145",
     expenseType: "Fixed",
     timeRange: "Indefinite",
+    dateRecorded: "2026-02-01",
   },
   {
+    id: "299e60a-e193-c482-1a38-92f4b0d11009",
     name: "Security Services",
     description: "Overnight security contract for the property.",
     transactionType: "Expense",
     amount: "$480",
     expenseType: "Fixed",
     timeRange: "Indefinite",
-  },
+    dateRecorded: "2026-02-01",
+  }
 ];
 
 export default function Budget() {
