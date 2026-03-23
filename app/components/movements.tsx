@@ -133,6 +133,20 @@ export default function Movements() {
     );
   };
 
+  const totals = movements.reduce(
+    (acc, movement) => {
+      const numeric = Number(movement.amount.replace(/[^0-9.-]+/g, ""));
+      if (movement.transactionType === "Income") {
+        acc.income += numeric;
+      } else {
+        acc.expenses += numeric;
+      }
+      acc.balance = acc.income - acc.expenses;
+      return acc;
+    },
+    { income: 0, expenses: 0, balance: 0 }
+  );
+
   return (
     <section className="mt-14 w-full">
       <div className="mb-6">
@@ -204,6 +218,26 @@ export default function Movements() {
             </dl>
           </article>
         ))}
+      </div>
+      <div className="mt-6 grid gap-4 text-sm sm:grid-cols-3">
+        <div className="rounded-lg border border-zinc-200 bg-white p-4">
+          <p className="text-zinc-500">Total Income</p>
+          <p className="text-lg font-semibold text-black">
+            ${totals.income.toFixed(2)}
+          </p>
+        </div>
+        <div className="rounded-lg border border-zinc-200 bg-white p-4">
+          <p className="text-zinc-500">Total Expenses</p>
+          <p className="text-lg font-semibold text-black">
+            ${totals.expenses.toFixed(2)}
+          </p>
+        </div>
+        <div className="rounded-lg border border-zinc-200 bg-white p-4">
+          <p className="text-zinc-500">Balance</p>
+          <p className="text-lg font-semibold text-black">
+            ${totals.balance.toFixed(2)}
+          </p>
+        </div>
       </div>
     </section>
   );
