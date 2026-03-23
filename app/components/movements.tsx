@@ -148,10 +148,29 @@ export default function Movements() {
             className="rounded-lg border border-zinc-200 bg-white p-4 shadow-sm"
           >
             <div className="flex items-baseline justify-between gap-2">
-              <h3 className="text-base font-semibold text-black">{movement.name}</h3>
-              <span className="text-sm font-semibold text-zinc-800">
-                {movement.amount}
-              </span>
+              <h3 className="text-base font-semibold text-black">
+                {movement.name}
+              </h3>
+              {movement.verificationStatus === "Pending" ? (
+                <input
+                  type="text"
+                  value={movement.amount}
+                  onChange={(event) =>
+                    setMovements((current) =>
+                      current.map((item) =>
+                        item.id === movement.id
+                          ? { ...item, amount: event.target.value }
+                          : item
+                      )
+                    )
+                  }
+                  className="w-24 rounded border border-zinc-200 px-2 py-1 text-right text-sm font-semibold text-zinc-800"
+                />
+              ) : (
+                <span className="text-sm font-semibold text-zinc-800">
+                  {movement.amount}
+                </span>
+              )}
             </div>
             <p className="mt-2 text-sm text-zinc-600">{movement.description}</p>
             <dl className="mt-4 grid grid-cols-2 gap-3 text-xs text-zinc-700">
