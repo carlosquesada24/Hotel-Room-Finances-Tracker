@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const transactions = [
   {
     id: "a11c8e2-6d1b-4c9a-9b2f-1a7d3e5f1001",
@@ -54,11 +56,19 @@ const transactions = [
 export default function Budget() {
   return (
     <section className="mt-14 w-full">
-      <div className="mb-6">
-        <h2 className="text-2xl font-semibold">Budget</h2>
-        <p className="mt-2 text-sm text-zinc-600">
-          Record monthly transactions once and reuse them every month.
-        </p>
+      <div className="mb-6 flex flex-wrap items-start justify-between gap-4">
+        <div>
+          <h2 className="text-2xl font-semibold">Budget</h2>
+          <p className="mt-2 text-sm text-zinc-600">
+            Record monthly transactions once and reuse them every month.
+          </p>
+        </div>
+        <Link
+          href="budget/create"
+          className="rounded-md bg-black px-4 py-2 text-sm font-semibold text-white"
+        >
+          Add item
+        </Link>
       </div>
       <div className="grid gap-4 sm:grid-cols-2">
         {transactions.map((item) => (
