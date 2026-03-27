@@ -1,4 +1,40 @@
+"use client";
+
+import { useState } from "react";
+import { useGlobalContext } from "../../context/GlobalContext";
+
 export default function CreateBudgetItemPage() {
+  const { setBudgetItemsList } = useGlobalContext();
+  const [transactionType, setTransactionType] = useState("income");
+  const [name, setName] = useState("");
+  const [description, setDescription] = useState("");
+  const [amount, setAmount] = useState("");
+  const [amountType, setAmountType] = useState("fixed");
+  const [timeRange, setTimeRange] = useState("indefinite");
+  const [startMonth, setStartMonth] = useState("");
+  const [endMonth, setEndMonth] = useState("");
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setBudgetItemsList((current) => [
+      ...current,
+      {
+        id: crypto.randomUUID(),
+        name: name.trim() || "New item",
+        description: description.trim() || "No description provided.",
+        transactionType:
+          transactionType === "income" ? "Income" : "Expense",
+        amount: amount ? `$${Number(amount).toFixed(2)}` : "$0.00",
+        expenseType: amountType === "fixed" ? "Fixed" : "Variable",
+        timeRange:
+          timeRange === "indefinite"
+            ? "Indefinite"
+            : `${startMonth || "Custom"} – ${endMonth || "Custom"}`,
+        dateRecorded: new Date().toISOString().slice(0, 10),
+      },
+    ]);
+  };
+
   return (
     <section className="w-full">
       <div className="mb-8">
@@ -13,7 +49,7 @@ export default function CreateBudgetItemPage() {
         </p>
       </div>
 
-      <form className="space-y-6">
+      <form className="space-y-6" onSubmit={handleSubmit}>
         <section className="rounded-lg border border-zinc-200 bg-white p-6 shadow-sm">
           <h2 className="text-lg font-semibold text-black">
             1. Transaction details
@@ -23,18 +59,6 @@ export default function CreateBudgetItemPage() {
           </p>
 
           <div className="mt-6 grid gap-4">
-            
-
-            <label className="grid gap-2 text-sm font-medium text-zinc-700">
-              Name
-              <input
-                type="text"
-                name="name"
-                placeholder="e.g., Mortgage, Parking fees"
-                className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-black"
-              />
-            </label>
-
             <div>
               <p className="text-sm font-medium text-zinc-700">
                 Select transaction type
@@ -45,6 +69,8 @@ export default function CreateBudgetItemPage() {
                     type="radio"
                     name="transactionType"
                     value="income"
+                    checked={transactionType === "income"}
+                    onChange={() => setTransactionType("income")}
                     className="h-4 w-4"
                   />
                   Income
@@ -54,12 +80,38 @@ export default function CreateBudgetItemPage() {
                     type="radio"
                     name="transactionType"
                     value="expense"
+                    checked={transactionType === "expense"}
+                    onChange={() => setTransactionType("expense")}
                     className="h-4 w-4"
                   />
                   Expense
                 </label>
               </div>
             </div>
+
+            <label className="grid gap-2 text-sm font-medium text-zinc-700">
+              Name
+              <input
+                type="text"
+                name="name"
+                placeholder="e.g., Mortgage, Parking fees"
+                value={name}
+                onChange={(event) => setName(event.target.value)}
+                className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-black"
+              />
+            </label>
+
+            <label className="grid gap-2 text-sm font-medium text-zinc-700">
+              Short description
+              <textarea
+                name="description"
+                rows={3}
+                placeholder="Add a short description for this budget item."
+                value={description}
+                onChange={(event) => setDescription(event.target.value)}
+                className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-black"
+              />
+            </label>
           </div>
         </section>
 
@@ -78,6 +130,8 @@ export default function CreateBudgetItemPage() {
                 min="0"
                 step="0.01"
                 placeholder="0.00"
+                value={amount}
+                onChange={(event) => setAmount(event.target.value)}
                 className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-black"
               />
             </label>
@@ -92,6 +146,8 @@ export default function CreateBudgetItemPage() {
                     type="radio"
                     name="amountType"
                     value="fixed"
+                    checked={amountType === "fixed"}
+                    onChange={() => setAmountType("fixed")}
                     className="h-4 w-4"
                   />
                   Fixed
@@ -101,6 +157,8 @@ export default function CreateBudgetItemPage() {
                     type="radio"
                     name="amountType"
                     value="variable"
+                    checked={amountType === "variable"}
+                    onChange={() => setAmountType("variable")}
                     className="h-4 w-4"
                   />
                   Variable
@@ -127,6 +185,8 @@ export default function CreateBudgetItemPage() {
                     type="radio"
                     name="timeRange"
                     value="indefinite"
+                    checked={timeRange === "indefinite"}
+                    onChange={() => setTimeRange("indefinite")}
                     className="h-4 w-4"
                   />
                   Indefinite
@@ -136,9 +196,11 @@ export default function CreateBudgetItemPage() {
                     type="radio"
                     name="timeRange"
                     value="custom"
+                    checked={timeRange === "custom"}
+                    onChange={() => setTimeRange("custom")}
                     className="h-4 w-4"
                   />
-                  Custom (start month – end month)
+                  Custom (start month - end month)
                 </label>
               </div>
             </div>
@@ -149,6 +211,8 @@ export default function CreateBudgetItemPage() {
                 <input
                   type="month"
                   name="startMonth"
+                  value={startMonth}
+                  onChange={(event) => setStartMonth(event.target.value)}
                   className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-black"
                 />
               </label>
@@ -157,6 +221,8 @@ export default function CreateBudgetItemPage() {
                 <input
                   type="month"
                   name="endMonth"
+                  value={endMonth}
+                  onChange={(event) => setEndMonth(event.target.value)}
                   className="w-full rounded-md border border-zinc-200 px-3 py-2 text-sm text-black"
                 />
               </label>
